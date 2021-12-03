@@ -1,0 +1,69 @@
+#!/usr/bin/python3.6 -u
+import subprocess as sub
+import numpy as np
+import display
+import sys
+import os
+
+from traitlets.config import get_config
+from IPython import embed
+from PIL import Image
+
+_ipy_config = get_config()
+_ipy_config.TerminalInteractiveShell.confirm_exit = False
+_ipy_config.InteractiveShell.colors = 'nocolor'
+
+cwd = '/root/app/mount/devdisp'
+sys.path.append(cwd)
+
+def p(name):
+    return '{}/{}.png'.format(cwd, name)
+
+def sh(i):
+    Image.fromarray(i).show()
+
+def pix(i, zoom=3, grid=1, color=127):
+    z, g = zoom, grid
+    h, w, _ = i.shape
+    out = np.full((h*z+(h-1)*g, w*z+(w-1)*g, 3), color, np.uint8)
+    for y in range(h):
+        for x in range(w):
+            out[y*(z+g) : y*(z+g)+z, x*(z+g) : x*(z+g)+z] = i[y][x]
+    Image.fromarray(out).show()
+
+d = None
+def start(resolution):
+    global d
+    config = dict(
+        display_number=1,
+        screen_width=resolution[0],
+        screen_height=resolution[1]
+    )
+    d = display.Display(config=config)
+    d.down()
+    d.up()
+    d.show()
+    cmd = "eom --fullscreen --display=:1.0 /root/app/mount/devdisp"
+    sub.Popen(
+        cmd.split(), 
+        stdout=sub.DEVNULL, stderr=sub.DEVNULL, env={'DISPLAY':':1.0'}
+    )
+    return d
+
+def interact(d):
+    os.chdir(cwd)
+    embed(config=_ipy_config)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        s = sys.argv[1]
+        w, h = s.split('x')
+        w = int(w)
+        h = int(h)
+    else:
+        w = 1280
+        h = 720
+    start((w, h)) 
+    interact(d)
+    d.down()

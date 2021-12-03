@@ -1,0 +1,26 @@
+#!/usr/bin/python3.6 -u
+import subprocess as sub
+import os.path
+import os
+import re
+
+basedir = '/root/app/mount/devdisp'
+names = os.listdir(basedir)
+nums = []
+for name in names:
+    m = re.match(r'(\d+)\.png', name)
+    if m:
+        nums.append(int(m.group(1)))
+nums.sort()
+if not nums:
+    nextNum = 1
+else:
+    nextNum = nums[-1] + 1
+
+fname = str(nextNum) + '.png'
+path = os.path.join(basedir, fname)
+
+cmd = (
+    "gnome-screenshot -f {} --display=:1.0"
+).format(path)
+sub.run(cmd.split(), stdout=sub.DEVNULL, stderr=sub.DEVNULL, timeout=10)

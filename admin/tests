@@ -1,0 +1,8 @@
+#!/bin/bash
+
+docker run \
+    --rm -t\
+    --name display-tests \
+    -v /root/app/mount:/root/app/mount \
+    displaydev:latest \
+    tests

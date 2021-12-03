@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /root/app/repo/display/src/display
+CFLAGS="-I/usr/local/lib/python3.6/dist-packages/numpy/core/include" python cutils_build.py build_ext --inplace

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+docker run \
+    --rm -it \
+    --name display \
+    -v /root/app/mount:/root/app/mount \
+    -v /root/app/mount/display/X11-unix:/tmp/.X11-unix \
+    --ipc="host" \
+    displaydev:latest \
+    /bin/bash

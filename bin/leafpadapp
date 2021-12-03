@@ -1,0 +1,19 @@
+#!/usr/bin/python3.6 -u
+import subprocess as sub
+import display
+
+def main():
+    d = display.Display(1)
+    try:
+        d.down()
+        d.up()
+        d.show()
+        sub.run(
+            ['leafpad'], stdout=sub.DEVNULL, stderr=sub.DEVNULL, 
+            env={'DISPLAY':':1.0'}
+        )
+    finally:
+        d.down()
+
+if __name__ == '__main__':
+    main() 

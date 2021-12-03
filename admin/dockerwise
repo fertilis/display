@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker run \
+    --rm -it \
+    --name display \
+    -v /root/app/repo/display:/root/app/repo/display \
+    -v /root/app/mount:/root/app/mount \
+    -v /run/docker.sock:/run/docker.sock \
+    -v /usr/bin/docker:/usr/bin/docker \
+    -v /usr/lib/x86_64-linux-gnu/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7 \
+    -v /tmp/.X11-unix/X0:/root/app/mount/jwmfb/.X11-unix/X0 \
+    displaydev:latest \
+    /bin/bash

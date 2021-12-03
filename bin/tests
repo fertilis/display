@@ -1,0 +1,7 @@
+#!/usr/bin/python3.6 -u
+import display.tests
+import unittest
+
+
+if __name__ == '__main__':
+    unittest.main(display.tests, verbosity=2)

@@ -1,0 +1,13 @@
+#!/bin/bash
+host=$1
+
+if [[ $host == "" ]]
+then
+    echo "Needs remote host"
+    exit 1
+fi
+
+echo "=== creating dirs ==="
+PROJECT=display
+ssh root@$host "mkdir -p /root/app/mount/$PROJECT/fbdirs /root/app/mount/$PROJECT/X11-unix &&  chmod 0777 /root/app/mount/$PROJECT/X11-unix"
+echo "done"

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker run \
+    --rm -it \
+    --name display \
+    -v /root/app/repo/display:/root/app/repo/display \
+    -v /root/app/mount:/root/app/mount \
+    -v /root/app/mount/display/X11-unix:/tmp/.X11-unix \
+    -v /tmp/.X11-unix/X0:/tmp/.X11-unix/X0 \
+    -e DISPLAY=':0.0' \
+    --ipc="host" \
+    displaydev:latest \
+    /bin/bash
