@@ -8,7 +8,7 @@ from .wait import wait_process_ended
 
 
 def path(name):
-    return '/root/app/repo/display/var/{}.png'.format(name)
+    return '/root/app/var/{}.png'.format(name)
 
 
 class Test(unittest.TestCase):

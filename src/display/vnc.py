@@ -69,7 +69,7 @@ class Vnc:
         if self._fullscreen:
             args += ['-fullscreen', ]
         if os.path.exists('/tmp/.X11-unix/X0'):
-            sub.run(['xdotool', 'set_desktop', '1'], env={'DISPLAY':':0.0'})
+            sub.run(['xdotool', 'set_desktop', '1'], env={'DISPLAY':':0.0'}, check=False)
         self._vncviewer_pipe = sub.Popen(
             args, stdout=sub.DEVNULL, stderr=sub.DEVNULL, env={'DISPLAY':':0.0'}
         )

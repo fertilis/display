@@ -1,13 +1,18 @@
 #!/bin/bash
 
+PROJECT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../
+
+mkdir -p /tmp/display-shared/X11-unix
+chmod -f 0777 /tmp/display-shared/X11-unix || true
+
 docker run \
     --rm -it \
-    --name display \
-    -v /root/app/repo/display:/root/app/repo/display \
-    -v /root/app/mount:/root/app/mount \
-    -v /root/app/mount/display/X11-unix:/tmp/.X11-unix \
+    -v $PROJECT_DIR/src/display:/root/app/src/display \
+    -v /tmp/display-shared:/root/shared \
+    -v /tmp/display-shared/X11-unix:/tmp/.X11-unix \
     -v /tmp/.X11-unix/X0:/tmp/.X11-unix/X0 \
+    -e COLUMNS="`tput cols`" -e LINES="`tput lines`" \
     -e DISPLAY=':0.0' \
     --ipc="host" \
-    displaydev:latest \
-    /bin/bash
+    fertilis/display:1.0 \
+    "${@:1}"

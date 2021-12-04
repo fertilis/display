@@ -4,7 +4,7 @@ import os.path
 import os
 import re
 
-basedir = '/root/app/mount/devdisp'
+basedir = '/root/shared'
 names = os.listdir(basedir)
 nums = []
 for name in names:

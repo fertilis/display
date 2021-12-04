@@ -2,7 +2,7 @@
 
 docker run \
     --rm -t\
-    --name display-tests \
-    -v /root/app/mount:/root/app/mount \
-    displaydev:latest \
+    -v /tmp/.X11-unix/X0:/tmp/.X11-unix/X0 \
+    -e DISPLAY=':0.0' \
+    fertilis/display:1.0 \
     tests

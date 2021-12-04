@@ -1,14 +1,14 @@
 #!/bin/bash
 
+DATA_DIR=${1:-./data}
+
 docker run \
     --rm -it \
     --name devdisp \
-    -v /root/app:/root/app \
-    -v /root/t:/root/t \
+    -v `realpath $DATA_DIR`:/root/data \
     -v /tmp/.X11-unix/X0:/tmp/.X11-unix/X0 \
     -e DISPLAY=:0.0 \
     -e COLUMNS="`tput cols`" -e LINES="`tput lines`" \
     --net=host \
-    displaydev:latest \
-    devdispapp "${@:1}"
-
+    fertilis/display:1.0 \
+    devdispapp "${@:2}"

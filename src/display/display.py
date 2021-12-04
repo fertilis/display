@@ -46,7 +46,7 @@ class Display:
 
     def attach(self):
         if self.display_number != 0:
-            fbpath = '/root/app/mount/display/fbdirs/%s/Xvfb_screen0' % self.display_number
+            fbpath = '/root/shared/fbdirs/%s/Xvfb_screen0' % self.display_number
             self._buffer_file = open(fbpath, 'rb') 
             self._mmap = mmap.mmap(self._buffer_file.fileno(), 0, prot=mmap.PROT_READ)
             self._mview = memoryview(self._mmap)
@@ -273,7 +273,7 @@ class Display:
 
     ### dev utils ###
     def savetp(self, rect, name):
-        path = '/root/app/mount/devdisp/%s.png' % name
+        path = '/root/data/%s.png' % name
         i = self.shot(rect)
         cv.imwrite(path, i[:, :, ::-1])
     

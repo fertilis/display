@@ -1,14 +1,12 @@
 #!/bin/bash
 
-PROJECT='display'
-IMAGE='displaydev:latest'
+#PROJECT='display'
+IMAGE='fertilis/display:1.0'
 BUILDDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../
 
 cd $BUILDDIR
-mkdir -p /root/app/mount/$PROJECT
-mkdir -p /root/app/mount/$PROJECT/fbdirs
-mkdir -p /root/app/mount/$PROJECT/X11-unix
-chmod 0777 /root/app/mount/$PROJECT/X11-unix
 find ./ -name __pycache__ -print0 | xargs -0 rm -r || true
 find ./ -name *.pyc -print0 | xargs -0 rm || true
 docker build -t $IMAGE $BUILDDIR 
+#docker login -u "fertilis" docker.io
+#docker push $IMAGE

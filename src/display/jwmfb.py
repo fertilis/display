@@ -11,7 +11,7 @@ class Jwmfb:
         self._xvfb_pipe = None
         self._jwm_pipe = None
         num = self._config['display_number']
-        self._fbdir = '/root/app/mount/display/fbdirs/%s' % num
+        self._fbdir = '/root/shared/fbdirs/%s' % num
 
     def up(self):
         self._write_jwmrc()

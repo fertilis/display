@@ -1,4 +1,0 @@
-- async wait_ and assert_ methods
-- hide mouse cursor by moving to bottom right corner
-- element wrapper
-- mouse_down() mouse_up() mouse_drag()
